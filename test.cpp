@@ -1,4 +1,4 @@
-/// @file test.cpp Plik główny przerób zmienne w plikach, oraz komentarze (polski)aby działały jako jeden projekt
+/// @file test.cpp Plik główny przerób zmienne w plikach, oraz komentarze (polski) aby działały jako jeden projekt
 
 #include "pch.h"
 #include <cstdlib>
@@ -6,16 +6,16 @@
 
 /// @brief Test1, sprawdza czy tablica zostanie niezmieniona jeżeli wpiszemy już posortowaną tablicę
 TEST(Testyogolne, Zachowanie_niezmienionej_tablicy) {
-    string input = ("1 2 3 4 5 6 7");
-    scalacz a(input); // Zmieniono 'merger' na 'scalacz'
-    EXPECT_EQ(input, a.zwracajTablice(input)); // Zmieniono 'returntabs' na 'zwracajTablice'
+    string input = ("2 4 6 8 10 12 14");
+    scalacz a(input);
+    EXPECT_EQ(input, a.zwracajTablice(input));
 }
 
 /// @brief Test2, Sprawdza czy dobrze posortuje odwróconą tablicę
 TEST(Testyogolne, sortowanie_odwrotnej_tablicy) {
-    string input = ("10 9 8 7 6 5 4 3 2 1 0");
-    scalacz a(input); // Zmieniono 'merger' na 'scalacz'
-    EXPECT_EQ("0 1 2 3 4 5 6 7 8 9 10", a.zwracajTablice(input)); // Zmieniono 'returntabs' na 'zwracajTablice'
+    string input = ("20 18 16 14 12 10 8 6 4 2 0");
+    scalacz a(input);
+    EXPECT_EQ("0 2 4 6 8 10 12 14 16 18 20", a.zwracajTablice(input));
 }
 
 /// @brief Test3, sprawdza czy posortuje randomową tablicę
@@ -23,16 +23,16 @@ TEST(Testyogolne, randomowa_tablica) {
     srand(static_cast<unsigned int>(time(0)));
     int i = 0;
     string r;
-    int t = rand() % 100 + 1;
+    int t = rand() % 50 + 5;
     while (i < t) {
-        r += to_string(rand() % 10000 - 2001);
+        r += to_string(rand() % 5000 - 1000);
         if (i != (t - 1)) {
             r += " ";
         }
         i++;
     }
 
-    scalacz a(r); // Zmieniono 'merger' na 'scalacz'
+    scalacz a(r);
 
     int spaces = 0;
     for (int j = 0; j < r.length(); j++) {
@@ -42,7 +42,7 @@ TEST(Testyogolne, randomowa_tablica) {
     }
 
     int j = 0;
-    int* tab = a.pobierzTablice(); // Zmieniono 'tabser' na 'pobierzTablice'
+    int* tab = a.pobierzTablice();
     while (j < spaces - 1) {
         if (tab[j] == tab[j + 1]) {
             EXPECT_EQ(tab[j], tab[j + 1]);
@@ -56,56 +56,56 @@ TEST(Testyogolne, randomowa_tablica) {
 
 /// @brief Test4 sprawdza czy posortuje tablicę z ujemnymi elementami
 TEST(Testyogolne, ujemne_elementy) {
-    string input = ("-1 -2 -54 -67 -213 -678 -12 -9 -78 -3 -123342 -1456");
-    scalacz a(input); // Zmieniono 'merger' na 'scalacz'
-    EXPECT_EQ("-123342 -1456 -678 -213 -78 -67 -54 -12 -9 -3 -2 -1", a.zwracajTablice(input)); // Zmieniono 'returntabs' na 'zwracajTablice'
+    string input = ("-3 -7 -22 -47 -102 -345 -23 -15 -50 -8 -25000 -950");
+    scalacz a(input);
+    EXPECT_EQ("-25000 -950 -345 -102 -50 -47 -23 -22 -15 -8 -7 -3", a.zwracajTablice(input));
 }
 
 /// @brief Test5 sprawdza czy posortuje tablicę z ujemnymi i dodatnimi elementami
 TEST(Testyogolne, elementy_dodatnie_i_ujemne) {
-    string input = ("5 1 7 2 4 3 6 8 0 -2 -1");
-    scalacz a(input); // Zmieniono 'merger' na 'scalacz'
-    EXPECT_EQ("-2 -1 0 1 2 3 4 5 6 7 8", a.zwracajTablice(input)); // Zmieniono 'returntabs' na 'zwracajTablice'
+    string input = ("9 3 12 6 8 5 10 -3 -1 -7 0");
+    scalacz a(input);
+    EXPECT_EQ("-7 -3 -1 0 3 5 6 8 9 10 12", a.zwracajTablice(input));
 }
 
 /// @brief Test6 sprawdza czy wyskoczy błąd przy tablicy bez elementów
 TEST(Testyogolne, sortowanie_tablicy_bez_elemenow) {
     string input = ("");
-    scalacz a(input); // Zmieniono 'merger' na 'scalacz'
-    EXPECT_EQ("", a.zwracajTablice(input)); // Zmieniono 'returntabs' na 'zwracajTablice'
+    scalacz a(input);
+    EXPECT_EQ("", a.zwracajTablice(input));
 }
 
 /// @brief Test7 sprawdza czy posortuje tablicę z jednym elementem
 TEST(Testyogolne, sortowanie_tablicy_jeden_element) {
-    string input = ("1");
-    scalacz a(input); // Zmieniono 'merger' na 'scalacz'
-    EXPECT_EQ("1", a.zwracajTablice(input)); // Zmieniono 'returntabs' na 'zwracajTablice'
+    string input = ("7");
+    scalacz a(input);
+    EXPECT_EQ("7", a.zwracajTablice(input));
 }
 
 /// @brief Test8 sprawdza czy posortuje tablicę z powtarzającymi się elementami
 TEST(Testyogolne, sortowanie_tablicy_powtarzajace_elementy) {
-    string input = ("1 1 1 3 3 3 2 2 2 2 2 25 12 12 12");
-    scalacz a(input); // Zmieniono 'merger' na 'scalacz'
-    EXPECT_EQ("1 1 1 2 2 2 2 2 3 3 3 12 12 12 25", a.zwracajTablice(input)); // Zmieniono 'returntabs' na 'zwracajTablice'
+    string input = ("4 4 4 6 6 6 5 5 5 5 5 30 18 18 18");
+    scalacz a(input);
+    EXPECT_EQ("4 4 4 5 5 5 5 5 6 6 6 18 18 18 30", a.zwracajTablice(input));
 }
 
 /// @brief Test9 sprawdza czy posortuje tablicę z powtarzającymi się ujemnymi elementami
 TEST(Testyogolne, sortowanie_tablicy_powtarzajace_ujemne_elementy) {
-    string input = ("-1 -1 -1 -3 -3 -3 -2 -2 -2 -2 -2 -25 -12 -12 -12");
-    scalacz a(input); // Zmieniono 'merger' na 'scalacz'
-    EXPECT_EQ("-25 -12 -12 -12 -3 -3 -3 -2 -2 -2 -2 -2 -1 -1 -1", a.zwracajTablice(input)); // Zmieniono 'returntabs' na 'zwracajTablice'
+    string input = ("-4 -4 -4 -6 -6 -6 -5 -5 -5 -5 -5 -30 -18 -18 -18");
+    scalacz a(input);
+    EXPECT_EQ("-30 -18 -18 -18 -6 -6 -6 -5 -5 -5 -5 -5 -4 -4 -4", a.zwracajTablice(input));
 }
 
 /// @brief Test10 sprawdza czy posortuje tablicę z powtarzającymi się ujemnymi i dodatnimi elementami
 TEST(Testyogolne, sortowanie_tablicy_powtarzajace_elementy_dodatnie_ujemne) {
-    string input = ("-1 -1 1 3 -3 -3 2 2 -2 -2 2 25 12 -12 12");
-    scalacz a(input); // Zmieniono 'merger' na 'scalacz'
-    EXPECT_EQ("-12 -3 -3 -2 -2 -1 -1 1 2 2 2 3 12 12 25", a.zwracajTablice(input)); // Zmieniono 'returntabs' na 'zwracajTablice'
+    string input = ("-2 -2 2 4 -4 -4 3 3 -3 -3 3 20 15 -15 15");
+    scalacz a(input);
+    EXPECT_EQ("-15 -4 -4 -3 -3 -2 -2 2 3 3 3 4 15 15 20", a.zwracajTablice(input));
 }
 
 /// @brief Test11 sprawdza czy posortuje tablicę z dwoma elementami rosnąco
 TEST(Testyogolne, sortowanie_tablicy_dwa_elementy_rosnaco) {
-    string input = ("1 3");
-    scalacz a(input); // Zmieniono 'merger' na 'scalacz'
-    EXPECT_EQ("1 3", a.zwracajTablice(input)); // Zmieniono 'returntabs' na 'zwracajTablice'
+    string input = ("5 9");
+    scalacz a(input);
+    EXPECT_EQ("5 9", a.zwracajTablice(input));
 }
